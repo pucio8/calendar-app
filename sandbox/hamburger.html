@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamburger to X Animation Example</title>
+    <style>
+        /* --- General styles for demonstration --- */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+            font-family: sans-serif;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* --- Styles for the hamburger icon --- */
+
+        /* CHANGE: Added relative positioning for the menu */
+        .hamburger-menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .hamburger-icon {
+            cursor: pointer;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background-color: white;
+        }
+
+        .hamburger-icon div {
+            width: 30px;
+            height: 4px;
+            background-color: #333;
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* --- Styles for the open state --- */
+
+        .hamburger-icon.open div:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .hamburger-icon.open div:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-icon.open div:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        /* Container for the menu, hidden by default */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            z-index: 1;
+            margin-top: 10px;
+            overflow: hidden; /* Ensures links don't go outside the rounded corners */
+        }
+
+        /* Style for a single link in the menu */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.2s;
+        }
+
+        /* Hover effect for the link */
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Class to show the menu, added by JavaScript */
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Click the icon</h1>
+
+        <div class="hamburger-menu">
+            <!-- HTML structure for the hamburger icon -->
+            <div class="hamburger-icon" onclick="toggleAnimation(this)">
+                <!-- These three empty divs are the hamburger bars, styled by CSS -->
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+            <!-- Dropdown menu -->
+            <div id="myDropdown" class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * Toggles the 'open' class on the icon and the 'show' class on the dropdown menu.
+         * @param {HTMLElement} element - The clicked element (div.hamburger-icon).
+         */
+        function toggleAnimation(element) {
+            // Toggle the icon animation
+            element.classList.toggle('open');
+            
+            // Show/hide the menu
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the menu when clicking outside of it
+        window.onclick = function(event) {
+            if (!event.target.closest('.hamburger-menu')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                const icons = document.getElementsByClassName("hamburger-icon");
+
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                        // Reset the hamburger icon as well
+                        icons[i].classList.remove('open');
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>

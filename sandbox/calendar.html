@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar Grid Example</title>
+    <style>
+        /* --- General styles for demonstration --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .calendar-container {
+            width: 100%;
+            max-width: 500px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+
+        /* --- Styles for the calendar grid --- */
+
+        /* Grid container that creates 7 equal columns */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px; /* Gaps between cells */
+        }
+
+        /* Style for a single cell (both header and day) */
+        .day-header, .day {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        /* Style for headers (Mon, Tue, Wed...) */
+        .day-header {
+            font-weight: bold;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        /* Style for a cell with a day number */
+        .day {
+            background-color: #ecf0f1;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        /* Hover effect for a day cell */
+        .day:hover {
+            background-color: #bdc3c7;
+        }
+
+        /* Style for an empty cell at the beginning of the month */
+        .day.empty {
+            background-color: transparent;
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calendar-container">
+        <h1 id="calendar-title">Loading...</h1>
+
+        <!-- 1. Container for the day of the week headers (Mon, Tue, etc.) -->
+        <div class="calendar-grid" id="day-headers"></div>
+        
+        <!-- 2. Container for the actual days of the month, which will be filled by JavaScript -->
+        <div class="calendar-grid" id="calendar-grid"></div>
+    </div>
+
+    <script>
+        // --- Handles for HTML elements ---
+        const calendarTitle = document.getElementById('calendar-title');
+        const dayHeadersGrid = document.getElementById('day-headers');
+        const calendarGrid = document.getElementById('calendar-grid');
+
+        /**
+         * Generates and displays the calendar grid for a given month and year.
+         * @param {number} year - The year to display (e.g., 2025).
+         * @param {number} month - The month to display (0 = January, 11 = December).
+         */
+        function generateCalendar(year, month) {
+
+            // --- Step 1: Generate list of headers (Mon, Tue, ...) --- 
+            const dayHeaders = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+            dayHeaders.forEach(header => {
+                dayHeadersGrid.innerHTML += `<div class="day-header">${header}</div>`;
+            });
+
+            // --- Step 2: Set the calendar title ---
+            const dateForTitle = new Date(year, month);
+            const monthName = dateForTitle.toLocaleString('en-US', { month: 'long' });
+            calendarTitle.textContent = `${monthName} ${year}`;
+
+            // --- Step 3: Date calculations ---
+            const firstDayOfMonth = new Date(year, month, 1); // eg. 1 July 2025
+            const daysInMonth = new Date(year, month + 1, 0).getDate(); // eg. 31 , 0 is last day of month before
+            // Calculate which day of the week the month starts on (0=Monday, 6=Sunday)
+            const startDayOfWeek = (firstDayOfMonth.getDay() + 6) % 7;
+
+            // --- Step 4: Add empty cells at the beginning of the month ---
+            for (let i = 0; i < startDayOfWeek; i++) {
+                calendarGrid.innerHTML += `<div class="day empty"></div>`;
+            }
+
+            // --- Step 5: Add the actual days of the month ---
+            for (let i = 1; i <= daysInMonth; i++) {
+                // Create a new div element for each day
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'day'; // Assign it the .day class
+                dayDiv.textContent = i;   // Put the day number inside it
+                
+                // Add a click handler (here, just an example alert)
+                dayDiv.onclick = () => alert(`Clicked on day: ${i}`);
+
+                // Add the created div to the calendar grid
+                calendarGrid.appendChild(dayDiv);
+            }
+        }
+
+        // --- Script Execution ---
+        // When the page loads, generate the calendar for the current month and year.
+        const today = new Date();
+        generateCalendar(today.getFullYear(), today.getMonth());
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# Logs
+*.log
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# VSCode / IDE
+.vscode/
+.idea/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Environment / secrets
+.env
+.env.*
+*.secret.json
+*.secrets.json
+*.key.json
+*.credentials.json
+*token*.json
+credentials*
+rtoken*
+
+# MyPy / Pyre / Pytype
+.mypy_cache/
+.pyre/
+.pytype/
+
+# Pytest
+.pytest_cache/
+
+# Test coverage
+htmlcov/
+.coverage
+coverage.xml
+.cache
+
+# Custom user files
+*.bak
+*.tmp
+notes.txt

@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+jinja2
+google-auth-oauthlib
+google-api-python-client
+pydantic
+itsdangerous
+pydantic-settings
