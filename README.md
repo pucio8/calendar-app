@@ -1,9 +1,8 @@
 # Interactive Google Calendar Scheduler
 
-A web application built with **FastAPI** that allows users to interactively select dates
-on a calendar and add various event types (e.g., duty, blood donation) directly to their **Google Calendar**.
+A web application built with **FastAPI** that allows users to interactively select dates on a calendar and add various event types (e.g., duty, day off) directly to their **Google Calendar**.
 
-***
+---
 
 ## Key Features
 
@@ -14,7 +13,7 @@ on a calendar and add various event types (e.g., duty, blood donation) directly 
 * **Direct Calendar Integration:** Events are added to the user's primary calendar with a single click.
 * **Responsive Design:** The interface is designed to work on both desktop and mobile devices.
 
-***
+---
 
 ## Tech Stack
 
@@ -24,11 +23,11 @@ on a calendar and add various event types (e.g., duty, blood donation) directly 
 * **API:** Google Calendar API v3
 * **Configuration:** Pydantic, python-dotenv
 
-***
+---
 
 ## Installation and Setup
 
-Follow these steps to run the project locally.
+Follow these steps to set up and run the project locally.
 
 ### 1. Prerequisites
 
@@ -42,37 +41,33 @@ git clone [https://github.com/YOUR_USERNAME/google-calendar-scheduler.git](https
 cd google-calendar-scheduler
 ```
 
-### 3. InActive the Repository  
-
-1. Create and Activate a Virtual Environment
+3. Create and Activate a Virtual Environment
 Windows:
 ```bash
 python -m venv .venv
 .\.venv\Scripts\activate
 ```
-
-```bash
 macOS / Linux:
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-2. Install Dependencies
+4. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
-3. Configure Environment Variables
-You need to create two configuration files in the root project directory:
+5. Configure Environment Variables
+You need to create two configuration files in the project's root directory:
 
 a) .env file:
-Create a file named .env and add a secret key for session management.
-
+This file stores the session secret key. Create it and add the following content:
 ```bash
 # Generate a random string (e.g., using `secrets.token_hex(32)` in Python)
 SECRET_KEY="your_super_long_and_random_secret_key_here"
 ```
-
 b) credentials.json file:
+This file contains your Google OAuth credentials.
 
 Go to your project in the Google Cloud Console.
 
@@ -80,16 +75,52 @@ Navigate to "APIs & Services" > "Credentials".
 
 Create an "OAuth 2.0 Client ID" for a "Web application".
 
-In the "Authorized redirect URIs" field, add the following:
-
-http://127.0.0.1:8000/auth/callback
+In the "Authorized redirect URIs" field, add: http://127.0.0.1:8000/auth/callback
 
 Download the JSON file, rename it to credentials.json, and place it in the project's root directory.
 
-Usage
-Run the FastAPI application using uvicorn:
+---
 
+## Usage
+Once the setup is complete, run the FastAPI application using uvicorn:
 ```bash
 uvicorn app.main:app --reload
 ```
 The application will be available in your browser at http://127.0.0.1:8000.
+
+---
+
+## Screenshots
+
+Below are a few snapshots of the application interface.
+
+### 1. Login Page
+*The initial view of the application prompting the user to sign in with Google.*
+
+![Login Page](app/static/screen/1.png)
+
+### 2. Google Authentication
+*The standard Google account selection screen during the OAuth 2.0 flow.*
+
+![Google Authentication Screen](app/static/screen/1.5.png)
+
+### 3. Main Calendar View
+*The interactive calendar interface available after a successful login.*
+
+![Main Calendar View](app/static/screen/2.png)
+
+### 1. Login Page
+*The initial view of the application prompting the user to sign in with Google.*
+
+![Login Page](app/static/screen/1.png)
+
+### 2. Google Authentication
+*The standard Google account selection screen during the OAuth 2.0 flow.*
+
+![Google Authentication Screen](app/static/screen/1.5.png)
+
+### 3. Main Calendar View
+*The interactive calendar interface available after a successful login.*
+
+![Main Calendar View](app/static/screen/2.png)
+
