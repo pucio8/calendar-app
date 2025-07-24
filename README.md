@@ -82,6 +82,7 @@ Download the JSON file, rename it to credentials.json, and place it in the proje
 ---
 
 ## Usage
+
 Once the setup is complete, run the FastAPI application using uvicorn:
 ```bash
 uvicorn app.main:app --reload
@@ -90,6 +91,42 @@ The application will be available in your browser at http://127.0.0.1:8000.
 
 ---
 
+## Testing on Mobile Devices (with ngrok)
+
+To test the application on a mobile device or to get a public HTTPS URL for your local server, you can use ngrok. This is necessary because Google OAuth requires a valid, registered redirect URI.
+
+1. Install and Run ngrok
+Download ngrok from the official website.
+
+Authenticate your ngrok client (a one-time setup).
+
+Run the following command in a new terminal window to create a tunnel to your local server:
+
+```bash
+ngrok http 8000
+```
+
+2. Get Your Public URL
+Ngrok will provide you with a public HTTPS URL, for example:
+
+```bash
+https://random-string.ngrok-free.app.
+```
+
+3. Update Google Cloud Console
+Go back to your Google Cloud Console credentials page.
+
+In the "Authorized redirect URIs" section, add a new URI using your ngrok address:
+
+```bash
+https://random-string.ngrok-free.app/auth/callback
+```
+
+Save the changes.
+
+You can now access your local application from any device using the ngrok URL.
+
+---
 ## Screenshots
 
 Below are a few snapshots of the application interface.
