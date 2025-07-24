@@ -108,19 +108,3 @@ Below are a few snapshots of the application interface.
 *The interactive calendar interface available after a successful login.*
 
 ![Main Calendar View](app/static/screen/2.png)
-
-### 1. Login Page
-*The initial view of the application prompting the user to sign in with Google.*
-
-![Login Page](app/static/screen/1.png)
-
-### 2. Google Authentication
-*The standard Google account selection screen during the OAuth 2.0 flow.*
-
-![Google Authentication Screen](app/static/screen/1.5.png)
-
-### 3. Main Calendar View
-*The interactive calendar interface available after a successful login.*
-
-![Main Calendar View](app/static/screen/2.png)
-
