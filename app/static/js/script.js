@@ -41,6 +41,10 @@ function generateCalendar(year, month) {
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const startDay = (date.getDay() + 6) % 7; // 0 = Poniedziałek (Monday)
 
+  // Get today's date and reset its time to midnight for accurate comparisons.
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
   for (let i = 0; i < startDay; i++) {
     calendarGrid.innerHTML += `<div class="day empty"></div>`;
   } // Adds the actual days of the month
@@ -50,21 +54,32 @@ function generateCalendar(year, month) {
     dayDiv.className = "day";
     dayDiv.textContent = i;
 
-
-    // Coloring logic based on the reference date
+    // Create a date object for the day currently being drawn.
     const currentDate = new Date(year, month, i);
-    // Calculate the difference in milliseconds
-    const diffInMs = currentDate - epochDate;
-    // Convert milliseconds to days
-    const totalDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-    // Use the modulo operator to find the correct color in the 3-day cycle
-    const colorIndex = Math.abs(totalDays) % shiftColors.length;
-    dayDiv.classList.add(shiftColors[colorIndex]);
-
     const dateString = `${year}-${String(month + 1).padStart(2, "0")}-${String(
       i
     ).padStart(2, "0")}`;
-    dayDiv.onclick = () => toggleDay(dayDiv, dateString);
+
+    // Check if the day being drawn is in the past.
+    if (currentDate < today) {
+      // If so, gray it out and block interactions.
+      dayDiv.classList.add("past-day");
+    } else {
+      // If it's today or a future day, apply the normal logic.
+      // Shift coloring logic
+      const diffInMs = currentDate - epochDate;
+      const totalDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+      const colorIndex = ((totalDays % 3) + 3) % 3;
+      dayDiv.classList.add(shiftColors[colorIndex]);
+
+      // Border logic for the current day
+      if (currentDate.getTime() === today.getTime()) {
+        dayDiv.classList.add("today");
+      }
+
+      // Add the click handler
+      dayDiv.onclick = () => toggleDay(dayDiv, dateString);
+    }
     calendarGrid.appendChild(dayDiv);
   }
 }
