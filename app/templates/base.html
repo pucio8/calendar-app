@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Tytuł strony będzie dynamicznie wstawiany przez pliki dziedziczące -->
+    <title>{% block title %}Grafik Służbowy{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='/css/style.css') }}"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', path='/img/favicon.ico') }}"
+    />
+</head>
+<body>
+    <!-- Menu hamburger (zdefiniowane tylko raz, tutaj) -->
+    <div class="hamburger-menu">
+      <div class="hamburger-icon" onclick="toggleMenu(event)">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div id="logout-dropdown" class="dropdown-content">
+        <div class="dropdown-user-info">
+          Zalogowano jako:<br />
+          <strong>{{ user_email }}</strong>
+        </div>
+        <a href="/">Grafik Służbowy</a>
+        <a href="/auth/logout">Wyloguj</a>
+      </div>
+    </div>
+
+    <!-- === GŁÓWNY BLOK TREŚCI === -->
+    <!-- To jest puste miejsce, w które zostanie "wstrzyknięta" zawartość z innych plików -->
+    {% block content %}{% endblock %}
+
+    <!-- Stopka (zdefiniowana tylko raz, tutaj) -->
+    <footer class="site-footer">
+        Stworzone przez plomat23@gmail.com | 
+        <a href="/privacy" target="_blank">Polityka Prywatności</a>
+    </footer>
+
+    <!-- Link do skryptu (zdefiniowany tylko raz, tutaj) -->
+    <script src="{{ url_for('static', path='/js/script.js') }}"></script>
+</body>
+</html>

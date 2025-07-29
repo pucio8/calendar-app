@@ -1,103 +1,68 @@
-<!DOCTYPE html>
-<html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Grafik do Kalendarza Google</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', path='/css/style.css') }}"
-    />
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="{{ url_for('static', path='/img/favicon.ico') }}"
-    />
-  </head>
-  <body>
-    <!-- Hamburger menu -->
-    <div class="hamburger-menu">
-      <div class="hamburger-icon" onclick="toggleMenu(event)">
-        <div></div>
-        <div></div>
-        <div></div>
+{% extends "base.html" %}
+
+{% block title %}Grafik Służbowy{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Before login -->
+    <h1>Grafik Służbowy</h1>
+    <p id="login-prompt">
+      Zaloguj się przez Google, aby zarządzać swoim kalendarzem.
+    </p>
+
+    <a href="/auth/login/google" class="button button-google"
+      >Zaloguj się przez Google</a
+    >
+
+    <!-- After login, calendar -->
+    <div id="scheduler" style="display: none">
+      <!-- Calendar controls -->
+      <div class="controls">
+        <button class="nav-arrow prev" onclick="previousMonth()">
+          &#9664;
+        </button>
+        <select id="month-select"></select>
+        <select id="year-select"></select>
+        <select id="event-type-select">
+          <option value="duty">Służba 🟨</option>
+          <option value="duty_off">Wolna służba 🟦</option>
+          <option value="delegation">Delegacja 🟧</option>
+          <option value="training">Szkolenie 🟩</option>
+          <option value="blood">Krew 🟥</option>
+        </select>
+        <button class="nav-arrow next" onclick="nextMonth()">
+          &#9654;
+        </button>
       </div>
-      <div id="logout-dropdown" class="dropdown-content">
-        <div class="dropdown-user-info">
-          User <strong>{{ user_email }}</strong>
+       <!-- Day headers -->
+      <div class="calendar-grid" id="day-headers"></div> 
+       <!-- Calendar grid -->
+      <div class="calendar-grid" id="calendar-grid"></div>
+
+      <div class="action-buttons">
+        <button class="button" onclick="submitEvents()">
+          Dodaj do Kalendarza
+        </button>
+      </div>
+
+      <!-- Legend -->
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #fffbe6"></div>
+          <span>I Zmiana</span>
         </div>
-        <a href="/">Grafik Służbowy</a>
-        <a href="/auth/logout">Wyloguj</a>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #ffe6e6"></div>
+          <span>II Zmiana</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #e6f7ff"></div>
+          <span>III Zmiana</span>
+        </div>
       </div>
     </div>
 
-    <div class="container">
-      <!-- Before login -->
-      <h1>Grafik Służbowy</h1>
-      <p id="login-prompt">
-        Zaloguj się przez Google, aby zarządzać swoim kalendarzem.
-      </p>
-
-      <a href="/auth/login/google" class="button button-google"
-        >Zaloguj się przez Google</a
-      >
-
-      <!-- After login, calendar -->
-      <div id="scheduler" style="display: none">
-        <!-- Calendar controls:
-               - prev arrow,
-               - year,
-               - month,
-               - event type,
-               - next arrow
-            -->
-        <div class="controls">
-          <button class="nav-arrow prev" onclick="previousMonth()">
-            &#9664;
-          </button>
-          <select id="month-select"></select>
-          <select id="year-select"></select>
-          <select id="event-type-select">
-            <option value="duty">Służba 🟨</option>
-            <option value="duty_off">Wolna służba 🟦</option>
-            <option value="delegation">Delegacja 🟧</option>
-            <option value="training">Szkolenie 🟩</option>
-            <option value="blood">Krew 🟥</option>
-          </select>
-          <button class="nav-arrow next" onclick="nextMonth()">&#9654;</button>
-        </div>
-        <!-- Day headers -->
-        <div class="calendar-grid" id="day-headers"></div>
-        <!-- Calendar grid -->
-        <div class="calendar-grid" id="calendar-grid"></div>
-
-        <div class="action-buttons">
-          <button class="button" onclick="submitEvents()">
-            Dodaj do Kalendarza
-          </button>
-        </div>
-
-        <!-- Legend -->
-        <div class="legend">
-          <div class="legend-item">
-            <div class="legend-color" style="background-color: #fffbe6"></div>
-            <span>I Zmiana</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-color" style="background-color: #ffe6e6"></div>
-            <span>II Zmiana</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-color" style="background-color: #e6f7ff"></div>
-            <span>III Zmiana</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Status, after action -->
-      <div id="status"></div>
-    </div>
-
-    <script src="{{ url_for('static', path='/js/script.js') }}"></script>
-  </body>
-</html>
+    <!-- Status, after action -->
+    <div id="status"></div>
+</div>
+{% endblock %}

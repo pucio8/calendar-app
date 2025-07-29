@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Polityka Prywatności{% endblock %}
+
+{% block content %}
+<div class="container container-privacy">
+    <h1>Polityka Prywatności dla Aplikacji Grafik Służbowy</h1>
+
+    <p><strong>Data ostatniej aktualizacji:</strong> 29 lipca 2025</p>
+
+    <p>Dziękujemy za korzystanie z naszej aplikacji. Twoja prywatność jest dla nas bardzo ważna. Poniższy dokument wyjaśnia, jakie dane przetwarzamy, w jaki sposób to robimy i jakie masz w związku z tym prawa.</p>
+
+    <h2>1. Jakie dane zbieramy?</h2>
+    <p>Aby świadczyć nasze usługi, aplikacja prosi o dostęp do następujących danych z Twojego konta Google:</p>
+    <ul>
+        <li><strong>Podstawowe informacje o profilu (adres e-mail):</strong> Używamy Twojego adresu e-mail do personalizacji interfejsu (np. w menu) oraz do tworzenia spersonalizowanych linków przekierowujących do Twojego Kalendarza Google.</li>
+        <li><strong>Uprawnienia do zarządzania Twoim Kalendarzem Google (`.../auth/calendar`):</strong> Aplikacja prosi o uprawnienia wyłącznie w celu <strong>tworzenia nowych wydarzeń</strong> w Twoim głównym kalendarzu. Aplikacja <strong>nie odczytuje, nie edytuje, nie usuwa ani nie przegląda</strong> żadnych istniejących wydarzeń w Twoim kalendarzu.</li>
+    </ul>
+
+    <h2>2. Jak wykorzystujemy Twoje dane?</h2>
+    <p>Twoje dane są wykorzystywane wyłącznie w następujących celach:</p>
+    <ul>
+        <li><strong>Uwierzytelnienie:</strong> Aby bezpiecznie zalogować Cię za pomocą Twojego konta Google, używając protokołu OAuth 2.0.</li>
+        <li><strong>Dodawanie wydarzeń:</strong> Aby na Twoje żądanie tworzyć w Twoim kalendarzu wydarzenia takie jak "Służba", "Wolna służba" czy "Krew".</li>
+        <li><strong>Personalizacja:</strong> Aby wyświetlić Twój adres e-mail w interfejsie aplikacji jako potwierdzenie, że jesteś zalogowany na właściwe konto.</li>
+    </ul>
+
+    <h2>3. Przechowywanie danych</h2>
+    <p>Aplikacja wykorzystuje po stronie serwera mechanizm sesji do tymczasowego przechowywania tokenów autoryzacyjnych Google. Tokeny te są niezbędne do komunikacji z API Google i są automatycznie usuwane po wylogowaniu lub wygaśnięciu sesji. <strong>Nie przechowujemy Twoich danych osobowych ani tokenów na stałe w żadnej bazie danych.</strong></p>
+
+    <h2>4. Udostępnianie danych</h2>
+    <p><strong>Nie udostępniamy, nie sprzedajemy ani nie przekazujemy Twoich danych osobowych żadnym stronom trzecim.</strong> Wszystkie dane są przetwarzane wyłącznie w celu zapewnienia podstawowej funkcjonalności aplikacji.</p>
+
+    <h2>5. Usługi firm trzecich</h2>
+    <p>Aplikacja korzysta z interfejsów API Google. Korzystanie z naszej aplikacji jest również objęte <a href="https://policies.google.com/privacy" target="_blank">Polityką Prywatności Google</a>.</p>
+
+    <h2>6. Kontakt</h2>
+    <p>Jeśli masz jakiekolwiek pytania dotyczące tej polityki prywatności, skontaktuj się z twórcą aplikacji pod adresem: <strong>plomat23@gmail.com</strong>.</p>
+</div>
+{% endblock %}

@@ -249,8 +249,37 @@ select {
     background-color: #ecf0f1; 
 }
 
-
 /* Class to show the menu */
 .show { 
     display: block; 
+}
+
+/* Footer */
+.site-footer {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px; /* Odsuwa stopkę od głównego kontenera */
+    color: #7f8c8d;
+    font-size: 0.9em;
+}
+
+.site-footer a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Privacy Policy */
+.container-privacy {
+    max-width: 800px; /* Szerszy kontener dla tekstu */
+    text-align: left;   /* Wyrównanie tekstu do lewej dla lepszej czytelności */
+}
+
+.container-privacy h1,
+.container-privacy h2 {
+    text-align: center; /* Pozostawiamy nagłówki wyśrodkowane */
 }
