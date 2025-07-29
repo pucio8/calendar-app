@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Grafik do Kalendarza Google</title>
@@ -13,157 +13,91 @@
       type="image/x-icon"
       href="{{ url_for('static', path='/img/favicon.ico') }}"
     />
-    <style>
-        :root {
-            --selection-color: #f1c40f; 
-        }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            background-color: #f4f7f6; 
-            color: #333; 
-            min-height: 100vh; 
-            margin: 0; 
-            padding: 80px 20px 20px 20px; 
-            box-sizing: border-box; 
-        }
-        .container { 
-            background-color: white; padding: 30px; border-radius: 12px; 
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1); text-align: center; 
-            max-width: 600px; width: 100%; margin: 0 auto; box-sizing: border-box;
-        }
-        h1 { color: #2c3e50; margin-top: 0; }
-        p { color: #555; }
-        .button { display: inline-block; background-color: #3498db; color: white; padding: 12px 24px; border: none; border-radius: 8px; text-decoration: none; font-size: 16px; cursor: pointer; transition: background-color 0.3s, color 0.3s; margin-top: 20px; }
-        .button:hover { background-color: #2980b9; }
-        .button-google { background-color: #dd4b39; }
-        .button-google:hover { background-color: #c23321; }
-        #status { margin-top: 20px; font-weight: bold; min-height: 24px; }
-        .controls { display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 20px; position: relative; flex-wrap: wrap; }
-        select { padding: 8px; border-radius: 6px; border: 1px solid #ccc; font-size: 16px; }
-        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
-        .day-header, .day { display: flex; justify-content: center; align-items: center; height: 40px; border-radius: 6px; }
-        .day-header { font-weight: bold; color: #7f8c8d; }
-        .day { cursor: pointer; border: 1px solid transparent; transition: background-color 0.2s, border-color 0.2s, color 0.2s; }
-        
-        .day.selected { 
-            background-color: var(--selection-color);
-            color: white;
-            border: 2px solid #2c3e50;
-            font-weight: bold;
-        }
-        .day.empty { cursor: default; border: none; }
-        
-        .day.shift-1 { background-color: #fffbe6; }
-        .day.shift-2 { background-color: #ffe6e6; }
-        .day.shift-3 { background-color: #e6f7ff; }
-
-        .day:not(.selected):hover {
-             filter: brightness(95%);
-        }
-
-        .action-buttons { display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap; }
-        .hamburger-menu { position: fixed; top: 20px; left: 20px; z-index: 1000; }
-        .hamburger-icon { cursor: pointer; padding: 8px; display: flex; flex-direction: column; gap: 5px; }
-        .hamburger-icon div { width: 28px; height: 4px; background-color: #333; border-radius: 2px; transition: all 0.3s ease-in-out; }
-        .hamburger-icon.open div:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-        .hamburger-icon.open div:nth-child(2) { opacity: 0; }
-        .hamburger-icon.open div:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
-        .dropdown-content { display: none; position: absolute; background-color: white; min-width: 160px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); border-radius: 8px; z-index: 1; left: 0; margin-top: 15px; overflow: hidden; }
-        .dropdown-content a { color: #333; padding: 12px 16px; text-decoration: none; display: block; text-align: left; transition: background-color 0.3s; }
-        .dropdown-content a:hover { background-color: #ecf0f1; }
-        .show { display: block; }
-        .legend { margin-top: 25px; display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; }
-        .legend-item { display: flex; align-items: center; gap: 8px; }
-        .legend-color { width: 20px; height: 20px; border-radius: 4px; }
-        .nav-arrow { background: none; border: none; font-size: 24px; cursor: pointer; color: #7f8c8d; padding: 0 10px; transition: color 0.2s; position: absolute; }
-        .nav-arrow:hover { color: #2c3e50; }
-        .nav-arrow.prev { left: 0; }
-        .nav-arrow.next { right: 0; }
-    </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Hamburger menu -->
     <div class="hamburger-menu">
-        <div class="hamburger-icon" onclick="toggleMenu(event)">
-            <div></div>
-            <div></div>
-            <div></div>
+      <div class="hamburger-icon" onclick="toggleMenu(event)">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div id="logout-dropdown" class="dropdown-content">
+        <div class="dropdown-user-info">
+          User <strong>{{ user_email }}</strong>
         </div>
-        <div id="logout-dropdown" class="dropdown-content">
-            <a href="/">Grafik Służbowy</a>
-            <a href="/auth/logout">Wyloguj</a>
-        </div>
+        <a href="/">Grafik Służbowy</a>
+        <a href="/auth/logout">Wyloguj</a>
+      </div>
     </div>
-    
+
     <div class="container">
-        <!-- Before login -->
-        <h1>Grafik Służbowy</h1>
-        <p id="login-prompt">
-          Zaloguj się przez Google, aby zarządzać swoim kalendarzem.
-        </p>
+      <!-- Before login -->
+      <h1>Grafik Służbowy</h1>
+      <p id="login-prompt">
+        Zaloguj się przez Google, aby zarządzać swoim kalendarzem.
+      </p>
 
-        <a href="/auth/login/google" class="button button-google"
-          >Zaloguj się przez Google</a
-        >
+      <a href="/auth/login/google" class="button button-google"
+        >Zaloguj się przez Google</a
+      >
 
-        <!-- After login, calendar -->
-        <div id="scheduler" style="display: none">
-          <!-- Calendar controls:
+      <!-- After login, calendar -->
+      <div id="scheduler" style="display: none">
+        <!-- Calendar controls:
                - prev arrow,
                - year,
                - month,
                - event type,
                - next arrow
             -->
-          <div class="controls">
-            <button class="nav-arrow prev" onclick="previousMonth()">
-              &#9664;
-            </button>
-            <select id="month-select"></select>
-            <select id="year-select"></select>
-            <select id="event-type-select">
-              <option value="duty">Służba 🟨</option>
-              <option value="duty_off">Wolna służba 🟦</option>
-              <option value="delegation">Delegacja 🟧</option>
-              <option value="training">Szkolenie 🟩</option>
-              <option value="blood">Krew 🟥</option>
-            </select>
-            <button class="nav-arrow next" onclick="nextMonth()">
-              &#9654;
-            </button>
-          </div>
-           <!-- Day headers -->
-          <div class="calendar-grid" id="day-headers"></div> 
-           <!-- Calendar grid -->
-          <div class="calendar-grid" id="calendar-grid"></div>
+        <div class="controls">
+          <button class="nav-arrow prev" onclick="previousMonth()">
+            &#9664;
+          </button>
+          <select id="month-select"></select>
+          <select id="year-select"></select>
+          <select id="event-type-select">
+            <option value="duty">Służba 🟨</option>
+            <option value="duty_off">Wolna służba 🟦</option>
+            <option value="delegation">Delegacja 🟧</option>
+            <option value="training">Szkolenie 🟩</option>
+            <option value="blood">Krew 🟥</option>
+          </select>
+          <button class="nav-arrow next" onclick="nextMonth()">&#9654;</button>
+        </div>
+        <!-- Day headers -->
+        <div class="calendar-grid" id="day-headers"></div>
+        <!-- Calendar grid -->
+        <div class="calendar-grid" id="calendar-grid"></div>
 
-          <div class="action-buttons">
-            <button class="button" onclick="submitEvents()">
-              Dodaj do Kalendarza
-            </button>
-          </div>
-
-          <!-- Legend -->
-          <div class="legend">
-            <div class="legend-item">
-              <div class="legend-color" style="background-color: #fffbe6"></div>
-              <span>I Zmiana</span>
-            </div>
-            <div class="legend-item">
-              <div class="legend-color" style="background-color: #ffe6e6"></div>
-              <span>II Zmiana</span>
-            </div>
-            <div class="legend-item">
-              <div class="legend-color" style="background-color: #e6f7ff"></div>
-              <span>III Zmiana</span>
-            </div>
-          </div>
+        <div class="action-buttons">
+          <button class="button" onclick="submitEvents()">
+            Dodaj do Kalendarza
+          </button>
         </div>
 
-        <!-- Status, after action -->
-        <div id="status"></div>
+        <!-- Legend -->
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: #fffbe6"></div>
+            <span>I Zmiana</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: #ffe6e6"></div>
+            <span>II Zmiana</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: #e6f7ff"></div>
+            <span>III Zmiana</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status, after action -->
+      <div id="status"></div>
     </div>
 
     <script src="{{ url_for('static', path='/js/script.js') }}"></script>
-</body>
+  </body>
 </html>
