@@ -50,18 +50,21 @@ async def add_events(request: Request, event_request: BatchEventRequest):
     try:
         creds = calendar_service.get_credentials_from_session(request.session['credentials'])
         tasks = []
+        added_events_details = []
         for event_item in event_request.events:
             config = event_configs.get(event_item.type)
             if config:
+                summary = config["summary"]
                 tasks.append(
                     calendar_service.add_calendar_event(
                         creds, 
                         event_item.date, 
-                        summary=config["summary"], 
+                        summary=summary, 
                         color_id=config["colorId"]
                     )
                 )
-        
+                added_events_details.append({"summary": summary, "date": event_item.date})
+               
         if not tasks:
             raise HTTPException(status_code=400, detail="No valid events to add.")
 
@@ -72,6 +75,7 @@ async def add_events(request: Request, event_request: BatchEventRequest):
         
         return {
             "message": f"Pomyślnie dodano {len(tasks)} wydarzeń.",
+            "added_events": added_events_details,
             "redirect_url": redirect_url
         }
     except Exception as e:
