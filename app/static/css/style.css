@@ -3,14 +3,29 @@
     --selection-color: #f1c40f; 
 }
 
+html {
+    height: 100%;
+}
+
 body { 
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
     background-color: #f4f7f6; 
     color: #333; 
-    min-height: 100vh; 
+    min-height: 100%; 
     margin: 0; 
-    padding: 80px 20px 20px 20px; 
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box; 
+}
+
+/* ZMIANA: Ten styl jest teraz kluczowy, aby "wypychać" stopkę */
+.main-content {
+    flex: 1 0 auto; /* Pozwala temu elementowi rosnąć i wypełniać dostępną przestrzeń */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px 20px 20px;
+    box-sizing: border-box;
 }
 
 /* === 2. Main Layout === */
@@ -22,7 +37,8 @@ body {
     text-align: center; 
     max-width: 600px; 
     width: 100%; 
-    margin: 0 auto; 
+    /* ZMIANA: Usunięto margines, ponieważ .main-content już centruje */
+    margin: 0;
     box-sizing: border-box;
 }
 
@@ -256,10 +272,11 @@ select {
 
 /* Footer */
 .site-footer {
+    flex-shrink: 0; /* Zapobiega kurczeniu się stopki */
     width: 100%;
     text-align: center;
     padding: 20px 0;
-    margin-top: 40px; /* Odsuwa stopkę od głównego kontenera */
+    box-sizing: border-box;
     color: #7f8c8d;
     font-size: 0.9em;
 }

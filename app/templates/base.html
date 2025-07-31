@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Tytuł strony będzie dynamicznie wstawiany przez pliki dziedziczące -->
+
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="{{ url_for('static', path='/img/apple-touch-icon.png') }}">
+    
+    <!-- Title -->
     <title>{% block title %}Grafik Służbowy{% endblock %}</title>
+
+    <!-- Styles -->
     <link
       rel="stylesheet"
       href="{{ url_for('static', path='/css/style.css') }}"
@@ -16,7 +22,7 @@
     />
 </head>
 <body>
-    <!-- Menu hamburger (zdefiniowane tylko raz, tutaj) -->
+    <!-- Menu hamburger -->
     <div class="hamburger-menu">
       <div class="hamburger-icon" onclick="toggleMenu(event)">
         <div></div>
@@ -33,17 +39,18 @@
       </div>
     </div>
 
-    <!-- === GŁÓWNY BLOK TREŚCI === -->
-    <!-- To jest puste miejsce, w które zostanie "wstrzyknięta" zawartość z innych plików -->
-    {% block content %}{% endblock %}
+    <!-- Main content -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
 
-    <!-- Stopka (zdefiniowana tylko raz, tutaj) -->
+    <!-- Footer -->
     <footer class="site-footer">
-        Stworzone przez plomat23@gmail.com | 
-        <a href="/privacy" target="_blank">Polityka Prywatności</a>
+        Created by plomat23@gmail.com | 
+        <a href="/privacy" target="_self">Polityka Prywatności</a>
     </footer>
 
-    <!-- Link do skryptu (zdefiniowany tylko raz, tutaj) -->
+    <!-- Script -->
     <script src="{{ url_for('static', path='/js/script.js') }}"></script>
 </body>
 </html>

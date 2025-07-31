@@ -11,7 +11,6 @@ from .config import settings
 from .routers import auth
 from .services import GoogleCalendarService
 
-# --- Konfiguracja Aplikacji ---
 app = FastAPI(title="Interactive Duty Scheduler")
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 app.add_middleware(SessionMiddleware, secret_key=settings.SECRET_KEY)
@@ -26,7 +25,7 @@ class EventItem(BaseModel):
 class BatchEventRequest(BaseModel):
     events: List[EventItem]
 
-# --- Główne Endpointy Aplikacji ---
+# --- Main endpoints ---
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
     user_email = request.session.get("user_email", "") 
@@ -36,11 +35,11 @@ async def read_root(request: Request):
     }
     return templates.TemplateResponse("index.html", context)
 
-# === NOWY ENDPOINT DLA POLITYKI PRYWATNOŚCI ===
+# --- Privacy policy endpoint ---
 @app.get("/privacy", response_class=HTMLResponse)
 async def privacy_policy(request: Request):
     """
-    Renderuje stronę z polityką prywatności.
+    Render the privacy policy page.
     """
     user_email = request.session.get("user_email", "")
     context = {
