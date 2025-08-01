@@ -1,5 +1,6 @@
 /* === 1. Variables & Global Styles === */
 :root {
+    /* Variable for the dynamic selection color */
     --selection-color: #f1c40f; 
 }
 
@@ -18,9 +19,8 @@ body {
     box-sizing: border-box; 
 }
 
-/* ZMIANA: Ten styl jest teraz kluczowy, aby "wypychać" stopkę */
 .main-content {
-    flex: 1 0 auto; /* Pozwala temu elementowi rosnąć i wypełniać dostępną przestrzeń */
+    flex: 1 0 auto; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,7 +37,6 @@ body {
     text-align: center; 
     max-width: 600px; 
     width: 100%; 
-    /* ZMIANA: Usunięto margines, ponieważ .main-content już centruje */
     margin: 0;
     box-sizing: border-box;
 }
@@ -123,7 +122,7 @@ select {
 
 .day { 
     cursor: pointer; 
-    border: 1px solid transparent; 
+    border: 2px solid transparent; 
     transition: background-color 0.2s, border-color 0.2s, color 0.2s; 
 }
 
@@ -137,7 +136,7 @@ select {
 .day.shift-2 { background-color: #ffe6e6; }
 .day.shift-3 { background-color: #e6f7ff; }
 
-/* Past day */
+/* --- Past day --- */
 .day.past-day {
     background-color: #f5f5f5;
     color: #ccc;
@@ -146,19 +145,19 @@ select {
 }
 
 /* --- Day Interactions & Selections --- */
-.day:hover {
+.day:not([class*="duty"]):not([class*="blood"]):not([class*="training"]):not([class*="delegation"]):hover {
     filter: brightness(95%);
 }
 
-.day.duty { background-color: #f1c40f !important; color: #333; border: 2px solid #c29d0b; }
-.day.duty_off { background-color: #3498db !important; color: white; border: 2px solid #2980b9; }
-.day.delegation { background-color: #e67e22 !important; color: white; border: 2px solid #d35400; }
-.day.training { background-color: #2ecc71 !important; color: white; border: 2px solid #27ae60; }
-.day.blood { background-color: #e74c3c !important; color: white; border: 2px solid #c0392b; }
+.day.duty { background-color: #f1c40f; color: #333; border-color: #c29d0b; }
+.day.duty_off { background-color: #3498db; color: white; border-color: #2980b9; }
+.day.delegation { background-color: #e67e22; color: white; border-color: #d35400; }
+.day.training { background-color: #2ecc71; color: white; border-color: #27ae60; }
+.day.blood { background-color: #e74c3c; color: white; border-color: #c0392b; }
 
-/* Today border */
+/* --- Today's border --- */
 .day.today {
-    border: 2px solid #e74c3c;
+    border-color: #e74c3c;
 }
 
 /* === 5. Calendar Navigation & Legend === */
@@ -247,7 +246,7 @@ select {
 .dropdown-user-info {
     color: #555;
     padding: 12px 16px;
-    /* font-size: 0.9em; */
+    font-size: 0.9em;
     text-align: left;
     border-bottom: 1px solid #eee; 
     background-color: #ecf0f1; 
@@ -270,9 +269,9 @@ select {
     display: block; 
 }
 
-/* Footer */
+/* === 7. Footer === */
 .site-footer {
-    flex-shrink: 0; /* Zapobiega kurczeniu się stopki */
+    flex-shrink: 0; 
     width: 100%;
     text-align: center;
     padding: 20px 0;
@@ -290,13 +289,13 @@ select {
     text-decoration: underline;
 }
 
-/* Privacy Policy */
+/* === 8. Privacy Policy Page === */
 .container-privacy {
-    max-width: 800px; /* Szerszy kontener dla tekstu */
-    text-align: left;   /* Wyrównanie tekstu do lewej dla lepszej czytelności */
+    max-width: 800px;
+    text-align: left;
 }
 
 .container-privacy h1,
 .container-privacy h2 {
-    text-align: center; /* Pozostawiamy nagłówki wyśrodkowane */
+    text-align: center; 
 }
