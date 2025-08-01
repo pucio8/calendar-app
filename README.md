@@ -169,4 +169,8 @@ For quick, app-like access, you can add this web application to your phone's hom
 
 [![Loom Demo Video](https://cdn.loom.com/sessions/thumbnails/5aed8975f2874f1baf1e2f197f1a69b6-with-play.gif)](https://www.loom.com/share/5aed8975f2874f1baf1e2f197f1a69b6)
 
+
+[![Loom Demo Video](https://www.loom.com/share/5aed8975f2874f1baf1e2f197f1a69b6?t=83&sid=89818c86-f1e3-4e44-bda0-879eaba0f4bb)]
+
+
 *Click the image above to watch a full video demonstration of the application.*
