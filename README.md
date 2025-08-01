@@ -90,41 +90,52 @@ uvicorn app.main:app --reload
 The application will be available in your browser at http://127.0.0.1:8000.
 
 ---
+## Deployment (Render)
 
-## Testing on Mobile Devices (with ngrok)
+To make the application publicly accessible, you can deploy it as a web service using a platform like Render. This is necessary for Google OAuth to work with a stable, registered URL.
 
-To test the application on a mobile device or to get a public HTTPS URL for your local server, you can use ngrok. This is necessary because Google OAuth requires a valid, registered redirect URI.
+1. Create a Procfile
+Before deploying, you must create a Procfile in the root directory of your project. This file tells Render what command to execute to start your application.
 
-1. Install and Run ngrok
-Download ngrok from the official website.
-
-Authenticate your ngrok client (a one-time setup).
-
-Run the following command in a new terminal window to create a tunnel to your local server:
+Create a file named Procfile (without any extension) and add the following line:
 
 ```bash
-ngrok http 8000
+web: uvicorn app.main:app --host=0.0.0.0 --port=$PORT
 ```
 
-2. Get Your Public URL
-Ngrok will provide you with a public HTTPS URL, for example:
+- web: declares a web process.
 
-```bash
-https://random-string.ngrok-free.app.
-```
+- --host=0.0.0.0 allows the server to be accessible externally.
 
-3. Update Google Cloud Console
+- --port=$PORT allows Render to dynamically assign the correct port.
+
+2. Deploy to Render
+Push your code to GitHub, ensuring it includes the Procfile and requirements.txt.
+
+Go to your Render Dashboard and create a "New Web Service".
+
+Connect your GitHub repository.
+
+Render should automatically detect that it's a Python app and set the Start Command based on your Procfile.
+
+Complete the service creation process.
+
+3. Get Your Public URL
+After the deployment is successful, Render will provide you with a public URL for your application, for example:
+https://your-app-name.onrender.com
+
+
+4. Update Google Cloud Console
+You must register your new public URL with Google for the login to work.
+
 Go back to your Google Cloud Console credentials page.
 
-In the "Authorized redirect URIs" section, add a new URI using your ngrok address:
+In the "Authorized redirect URIs" section, add a new URI using your Render address:
 
-```bash
-https://random-string.ngrok-free.app/auth/callback
-```
-
+https://your-app-name.onrender.com/auth/callback
 Save the changes.
 
-You can now access your local application from any device using the ngrok URL.
+Your application is now live and accessible from any device using the Render URL.
 
 ---
 ## Screenshots
@@ -145,3 +156,11 @@ Below are a few snapshots of the application interface.
 *The interactive calendar interface available after a successful login.*
 
 ![Main Calendar View](app/static/screen/2.png)
+
+### Add to Home Screen
+
+For quick, app-like access, you can add this web application to your phone's home screen.
+
+* **How to add:** Look for the "Add to Home Screen" option, typically found in your mobile browser's "Share" or settings menu.
+
+![Application icon on a mobile home screen](app/static/screen/3.png)
