@@ -164,3 +164,9 @@ For quick, app-like access, you can add this web application to your phone's hom
 * **How to add:** Look for the "Add to Home Screen" option, typically found in your mobile browser's "Share" or settings menu.
 
 ![Application icon on a mobile home screen](app/static/screen/3.png)
+
+## Application Demo
+
+[![Loom Demo Video](https://cdn.loom.com/sessions/thumbnails/5aed8975f2874f1baf1e2f197f1a69b6-with-play.gif)](https://www.loom.com/share/5aed8975f2874f1baf1e2f197f1a69b6)
+
+*Click the image above to watch a full video demonstration of the application.*
