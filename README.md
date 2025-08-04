@@ -4,6 +4,40 @@ A web application built with **FastAPI** that allows users to interactively sele
 
 ---
 
+## Screenshots
+
+Below are a few snapshots of the application interface.
+
+### 1. Login Page
+*The initial view of the application prompting the user to sign in with Google.*
+
+![Login Page](app/static/screen/1.png)
+
+### 2. Google Authentication
+*The standard Google account selection screen during the OAuth 2.0 flow.*
+
+![Google Authentication Screen](app/static/screen/1.5.png)
+
+### 3. Main Calendar View
+*The interactive calendar interface available after a successful login.*
+
+![Main Calendar View](app/static/screen/2.png)
+
+### Add to Home Screen
+
+For quick, app-like access, you can add this web application to your phone's home screen.
+
+* **How to add:** Look for the "Add to Home Screen" option, typically found in your mobile browser's "Share" or settings menu.
+
+![Application icon on a mobile home screen](app/static/screen/3.png)
+
+## Application Demo
+
+To see the application in action, please watch the short video demonstration on Loom:
+
+**[Click here to watch the video demo](https://www.loom.com/share/5aed8975f2874f1baf1e2f197f1a69b6)**
+
+
 ## Key Features
 
 * **Google OAuth 2.0 Integration:** Securely log in with your Google account.
@@ -138,35 +172,3 @@ Save the changes.
 Your application is now live and accessible from any device using the Render URL.
 
 ---
-## Screenshots
-
-Below are a few snapshots of the application interface.
-
-### 1. Login Page
-*The initial view of the application prompting the user to sign in with Google.*
-
-![Login Page](app/static/screen/1.png)
-
-### 2. Google Authentication
-*The standard Google account selection screen during the OAuth 2.0 flow.*
-
-![Google Authentication Screen](app/static/screen/1.5.png)
-
-### 3. Main Calendar View
-*The interactive calendar interface available after a successful login.*
-
-![Main Calendar View](app/static/screen/2.png)
-
-### Add to Home Screen
-
-For quick, app-like access, you can add this web application to your phone's home screen.
-
-* **How to add:** Look for the "Add to Home Screen" option, typically found in your mobile browser's "Share" or settings menu.
-
-![Application icon on a mobile home screen](app/static/screen/3.png)
-
-## Application Demo
-
-To see the application in action, please watch the short video demonstration on Loom:
-
-**[Click here to watch the video demo](https://www.loom.com/share/5aed8975f2874f1baf1e2f197f1a69b6)**
