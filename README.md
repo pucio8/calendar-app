@@ -169,8 +169,4 @@ For quick, app-like access, you can add this web application to your phone's hom
 
 To see the application in action, please watch the short video demonstration on Loom:
 
-<a href="https://www.loom.com/share/5aed8975f2874f1baf1e2f197f1a69b6"
-   target="_blank"
-   rel="noopener noreferrer">
-  <b>Click here to watch the video demo</b>
-</a>
+**[Click here to watch the video demo](https://www.loom.com/share/5aed8975f2874f1baf1e2f197f1a69b6)**
